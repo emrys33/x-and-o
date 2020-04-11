@@ -1,0 +1,15 @@
+table, td {  
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+table {
+    margin: 2% auto;
+    width: 600px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 15px;
+}
