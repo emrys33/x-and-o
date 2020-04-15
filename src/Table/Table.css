@@ -1,8 +1,7 @@
-table, td {  
+/* table, td {  
     border: 1px solid #ddd;
-    text-align: center;
-  }
-  
+} */
+
 table {
     margin: 2% auto;
     width: 600px;
@@ -11,5 +10,10 @@ table {
 }
 
 td {
-    padding: 15px;
+    height: 150px;
+    width: 33%;
+}
+
+td:hover {
+    background-color: #eee;
 }
