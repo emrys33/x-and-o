@@ -4,28 +4,38 @@ import './Table.css';
 
 class Table extends Component {
     state = {
-        unit00: {value: ''},
-        unit01: {value: ''},
-        unit02: {value: ''},
-        unit10: {value: ''},
-        unit11: {value: ''},
-        unit12: {value: ''},
-        unit20: {value: ''},
-        unit21: {value: ''},
-        unit22: {value: ''},
+        unit00: {value: '', id: 'unchanged'},
+        unit01: {value: '', id: 'unchanged'},
+        unit02: {value: '', id: 'unchanged'},
+        unit10: {value: '', id: 'unchanged'},
+        unit11: {value: '', id: 'unchanged'},
+        unit12: {value: '', id: 'unchanged'},
+        unit20: {value: '', id: 'unchanged'},
+        unit21: {value: '', id: 'unchanged'},
+        unit22: {value: '', id: 'unchanged'},
         counter: 0,
     }
 
-    UnitClickHandler = (clickedunit) => {
-        var counter = this.state.counter;
-        this.setState({counter: counter + 1})
+    WinnerChecker = () => {
         
-        if (counter % 2 === 0) {
-            this.setState({[clickedunit]: {value: <span id="x" style={{color: 'red', fontWeight: 'bold'}}>X</span>}})
+        return "in Winner Checker!"
+    }
+
+    UnitClickHandler = (clickedunit) => {
+        console.log(this.WinnerChecker())
+
+        if (this.state[clickedunit].id === 'unchanged') {
+            
+            var counter = this.state.counter;
+            this.setState({counter: counter + 1})
+
+            if (counter % 2 === 0) {
+                this.setState({[clickedunit]: {value: <span id="x" style={{color: 'red', fontWeight: 'bold'}}>X</span>, id: 'x'}})
+            }
+            else {
+                this.setState({[clickedunit]: {value: <span id="o" style={{color: 'blue', fontWeight: 'bold'}}>O</span>, id: 'o'}})
+            };
         }
-        else {
-            this.setState({[clickedunit]: {value: <span id="o" style={{color: 'blue', fontWeight: 'bold'}}>O</span>}})
-        };
     }
 
     render() {
