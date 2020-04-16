@@ -17,3 +17,7 @@ td {
 td:hover {
     background-color: #eee;
 }
+
+h1 {
+    text-align: center;
+}

@@ -20,7 +20,7 @@ class Table extends Component {
 
     WinnerChecker = () => {
         if(this.state.unit00.id === 'x' && this.state.unit01.id === 'x' && this.state.unit02.id === 'x') {
-            this.setState({wincondition: 'X Won!'})
+            this.setState({wincondition: 'X Won!', stopper: true})
             return 'Winner'
         }
         return 'NoWinner'
@@ -28,17 +28,20 @@ class Table extends Component {
 
     UnitClickHandler = (clickedunit) => {
 
-        if (this.state[clickedunit].id === 'unchanged') {
-            var counter = this.state.counter;
-            this.setState({counter: counter + 1})
-
-            if (counter % 2 === 0) {
-                this.setState({[clickedunit]: {value: <span id="x" style={{color: 'red', fontWeight: 'bold'}}>X</span>, id: 'x'}})
+        if (this.state.stopper === false) {
+            if (this.state[clickedunit].id === 'unchanged') {
+                var counter = this.state.counter;
+                this.setState({counter: counter + 1})
+    
+                if (counter % 2 === 0) {
+                    this.setState({[clickedunit]: {value: <span id="x" style={{color: 'red', fontWeight: 'bold'}}>X</span>, id: 'x'}})
+                }
+                else {
+                    this.setState({[clickedunit]: {value: <span id="o" style={{color: 'blue', fontWeight: 'bold'}}>O</span>, id: 'o'}})
+                };
             }
-            else {
-                this.setState({[clickedunit]: {value: <span id="o" style={{color: 'blue', fontWeight: 'bold'}}>O</span>, id: 'o'}})
-            };
         }
+        this.WinnerChecker();
         
     }
 
