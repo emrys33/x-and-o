@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import './Table.css';
 
@@ -14,18 +14,21 @@ class Table extends Component {
         unit21: {value: '', id: 'unchanged'},
         unit22: {value: '', id: 'unchanged'},
         counter: 0,
+        wincondition: '',
+        stopper: false,
     }
 
     WinnerChecker = () => {
-        
-        return "in Winner Checker!"
+        if(this.state.unit00.id === 'x' && this.state.unit01.id === 'x' && this.state.unit02.id === 'x') {
+            this.setState({wincondition: 'X Won!'})
+            return 'Winner'
+        }
+        return 'NoWinner'
     }
 
     UnitClickHandler = (clickedunit) => {
-        console.log(this.WinnerChecker())
 
         if (this.state[clickedunit].id === 'unchanged') {
-            
             var counter = this.state.counter;
             this.setState({counter: counter + 1})
 
@@ -36,38 +39,42 @@ class Table extends Component {
                 this.setState({[clickedunit]: {value: <span id="o" style={{color: 'blue', fontWeight: 'bold'}}>O</span>, id: 'o'}})
             };
         }
+        
     }
 
     render() {
         return (
-            <table>
-                <tbody>
-                <tr>
-                    <td onClick = {() => this.UnitClickHandler('unit00')}>
-                        {this.state.unit00.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit01')} style={{borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd'}}>
-                        {this.state.unit01.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit02')}>
-                        {this.state.unit02.value}</td>
-                </tr>
-                <tr>
-                    <td onClick = {() => this.UnitClickHandler('unit10')} style={{borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd'}}>
-                        {this.state.unit10.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit11')} style={{border: '1px solid #ddd'}}>
-                        {this.state.unit11.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit12')} style={{borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd'}}>
-                        {this.state.unit12.value}</td>
-                </tr>
-                <tr>
-                    <td onClick = {() => this.UnitClickHandler('unit20')}>
-                        {this.state.unit20.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit21')} style={{borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd'}}>
-                        {this.state.unit21.value}</td>
-                    <td onClick = {() => this.UnitClickHandler('unit22')}>
-                        {this.state.unit22.value}</td>
-                </tr>
-                </tbody>
-            </table>
+            <Fragment>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td onClick = {() => this.UnitClickHandler('unit00')}>
+                            {this.state.unit00.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit01')} style={{borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd'}}>
+                            {this.state.unit01.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit02')}>
+                            {this.state.unit02.value}</td>
+                    </tr>
+                    <tr>
+                        <td onClick = {() => this.UnitClickHandler('unit10')} style={{borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd'}}>
+                            {this.state.unit10.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit11')} style={{border: '1px solid #ddd'}}>
+                            {this.state.unit11.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit12')} style={{borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd'}}>
+                            {this.state.unit12.value}</td>
+                    </tr>
+                    <tr>
+                        <td onClick = {() => this.UnitClickHandler('unit20')}>
+                            {this.state.unit20.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit21')} style={{borderRight: '1px solid #ddd', borderLeft: '1px solid #ddd'}}>
+                            {this.state.unit21.value}</td>
+                        <td onClick = {() => this.UnitClickHandler('unit22')}>
+                            {this.state.unit22.value}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h1>{this.state.wincondition}</h1>
+            </Fragment>
         )
     };
 };
